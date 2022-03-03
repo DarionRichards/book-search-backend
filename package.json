@@ -1,0 +1,32 @@
+{
+	"name": "book-search-backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node src/server.js",
+		"dev": "nodemon src/server.js"
+	},
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/DarionRichards/book-search-backend.git"
+	},
+	"keywords": [],
+	"author": "https://github.com/DarionRichards",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/DarionRichards/book-search-backend/issues"
+	},
+	"homepage": "https://github.com/DarionRichards/book-search-backend#readme",
+	"dependencies": {
+		"apollo-server-express": "^3.6.3",
+		"bcrypt": "^5.0.1",
+		"express": "^4.17.3",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^6.2.4"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
+}
