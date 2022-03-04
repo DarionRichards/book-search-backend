@@ -4,24 +4,11 @@ import express from "express";
 import http from "http";
 import mongoose from "mongoose";
 
+import {typeDefs} from "./schema/index.js";
+import {resolvers} from "./resolvers/index.js";
+
 const app = express();
 const httpServer = http.createServer(app);
-
-const helloWorld = () => {
-	return "Hello, World!!";
-};
-
-const typeDefs = gql`
-	type Query {
-		hello: String
-	}
-`;
-
-const resolvers = {
-	Query: {
-		hello: helloWorld,
-	},
-};
 
 const server = new ApolloServer({
 	typeDefs,
