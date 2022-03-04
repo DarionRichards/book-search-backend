@@ -1,4 +1,5 @@
-import {ApolloServer, gql} from "apollo-server-express";
+import "dotenv/config";
+import {ApolloServer} from "apollo-server-express";
 import {ApolloServerPluginDrainHttpServer} from "apollo-server-core";
 import express from "express";
 import http from "http";
@@ -18,7 +19,7 @@ const server = new ApolloServer({
 
 const init = async () => {
 	try {
-		await mongoose.connect("mongodb://localhost:27017/bookSearchDb", {
+		await mongoose.connect(`mongodb://localhost:27017/${process.env.DB_NAME}`, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		});
