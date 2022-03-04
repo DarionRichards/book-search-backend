@@ -1,5 +1,6 @@
 import {getSingleUser} from "./getSingleUser.js";
 import {addUser} from "./addUser.js";
+import {saveBook} from "./saveBook.js";
 
 export const resolvers = {
 	Query: {
@@ -8,7 +9,7 @@ export const resolvers = {
 	Mutation: {
 		// 	login,
 		addUser,
-		// 	saveBook,
+		saveBook,
 		// 	removeBook,
 	},
 };
