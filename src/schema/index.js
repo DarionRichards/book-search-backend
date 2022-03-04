@@ -24,7 +24,7 @@ export const typeDefs = gql`
 	}
 
 	type Query {
-		me: User
+		me(_id: String, username: String): User
 	}
 
 	input LoginInput {
