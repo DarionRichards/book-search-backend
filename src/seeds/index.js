@@ -1,3 +1,4 @@
+import "dotenv/config";
 import mongoose from "mongoose";
 
 import User from "../models/index.js";
@@ -6,7 +7,7 @@ import {userSeed} from "./data/userSeed.js";
 
 const init = async () => {
 	try {
-		await mongoose.connect("mongodb://localhost:27017/bookSearchDb", {
+		await mongoose.connect(`mongodb://localhost:27017/${process.env.DB_NAME}`, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		});
