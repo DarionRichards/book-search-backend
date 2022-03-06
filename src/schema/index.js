@@ -24,7 +24,7 @@ export const typeDefs = gql`
 	}
 
 	type Query {
-		me(_id: String, username: String): User
+		me: User
 	}
 
 	input LoginInput {
@@ -51,6 +51,6 @@ export const typeDefs = gql`
 		login(loginInput: LoginInput!): Auth
 		addUser(userInput: UserInput!): Auth
 		saveBook(bookInput: BookInput!): User
-		removeBook(userId: String!, bookId: ID!): User
+		removeBook(bookId: ID!): User
 	}
 `;

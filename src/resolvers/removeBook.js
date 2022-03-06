@@ -1,9 +1,9 @@
 import User from "../models/index.js";
 
-export const removeBook = async (_, {userId, bookId}) => {
+export const removeBook = async (_, {bookId}, context) => {
 	try {
 		const newUser = await User.findOneAndUpdate(
-			{_id: userId},
+			{_id: context.user.id},
 			{
 				$pull: {
 					savedBooks: {bookId},
