@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 
 import {typeDefs} from "./schema/index.js";
 import {resolvers} from "./resolvers/index.js";
+import {authMiddleware} from "./utils/auth.js";
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -14,6 +15,7 @@ const httpServer = http.createServer(app);
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
+	context: authMiddleware,
 	plugins: [ApolloServerPluginDrainHttpServer({httpServer})],
 });
 

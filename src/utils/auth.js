@@ -11,23 +11,23 @@ export const signToken = ({email, username, id}) => {
 	return sign({data: payload}, secret, {expiresIn: expiration});
 };
 
-// export const authMiddleware = ({req}) => {
-// 	let token = req.body.token || req.query.token || req.headers.authorization;
+export const authMiddleware = ({req}) => {
+	let token = req.body.token || req.query.token || req.headers.authorization;
 
-// 	if (req.headers.authorization) {
-// 		token = token.split(" ").pop().trim();
-// 	}
+	if (req.headers.authorization) {
+		token = token.split(" ").pop().trim();
+	}
 
-// 	if (!token) {
-// 		return req;
-// 	}
+	if (!token) {
+		return req;
+	}
 
-// 	try {
-// 		const {data} = verify(token, secret, {maxAge: expiration});
-// 		req.user = data;
-// 	} catch {
-// 		throw new AuthenticationError("Invalid token");
-// 	}
+	try {
+		const {data} = verify(token, secret, {maxAge: expiration});
+		req.user = data;
+	} catch {
+		throw new AuthenticationError("Invalid token");
+	}
 
-// 	return req;
-// };
+	return req;
+};
