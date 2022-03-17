@@ -1,4 +1,4 @@
-import {AuthenticationError} from "apollo-server-errors";
+import {AuthenticationError, ApolloError} from "apollo-server-errors";
 import User from "../models/index.js";
 import {signToken} from "../utils/auth.js";
 
@@ -8,7 +8,7 @@ export const login = async (_, {loginInput}) => {
 
 		if (!userFromDb) {
 			console.log("[ERROR]: Failed to login || Cannot find user");
-			throw new AuthenticationError("Failed to login");
+			throw new ApolloError("Failed to login");
 		}
 
 		const correctPw = await userFromDb.isCorrectPassword(loginInput.password);
