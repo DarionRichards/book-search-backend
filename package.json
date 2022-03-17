@@ -21,6 +21,7 @@
 	},
 	"homepage": "https://github.com/DarionRichards/book-search-backend#readme",
 	"dependencies": {
+		"apollo-server": "^3.6.4",
 		"apollo-server-express": "^3.6.3",
 		"bcrypt": "^5.0.1",
 		"dotenv": "^16.0.0",

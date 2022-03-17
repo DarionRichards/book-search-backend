@@ -1,46 +1,34 @@
 import "dotenv/config";
-import {ApolloServer} from "apollo-server-express";
-import {ApolloServerPluginDrainHttpServer} from "apollo-server-core";
-import express from "express";
-import http from "http";
+import {ApolloServer} from "apollo-server";
 import mongoose from "mongoose";
 
 import {typeDefs} from "./schema/index.js";
 import {resolvers} from "./resolvers/index.js";
 import {authMiddleware} from "./utils/auth.js";
 
-const app = express();
-const httpServer = http.createServer(app);
-
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
 	context: authMiddleware,
-	plugins: [ApolloServerPluginDrainHttpServer({httpServer})],
 });
 
 const init = async () => {
 	try {
-		await mongoose.connect(
+		const connectionUrl =
 			process.env.MONGODB_URI ||
-				`mongodb://localhost:27017/${process.env.DB_NAME}`,
-			{
-				useNewUrlParser: true,
-				useUnifiedTopology: true,
-			}
-		);
+			`mongodb://localhost:27017/${process.env.DB_NAME}`;
 
-		await server.start();
+		await mongoose.connect(connectionUrl, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		});
 
-		server.applyMiddleware({app});
-
-		await new Promise((resolve) => httpServer.listen({port: 4000}, resolve));
-
-		console.log(
-			`🚀 Server ready at http://localhost:4000${server.graphqlPath}`
-		);
+		const {url} = await server.listen({
+			port: process.env.PORT || 4000,
+		});
+		console.log(`Server running on ${url}`);
 	} catch (error) {
-		console.log(`[ERROR]: Failed to connect || ${error.message}`);
+		console.log(`[ERROR]: Failed to connect to DB | ${error.message}`);
 	}
 };
 
